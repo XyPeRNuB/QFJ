@@ -10,7 +10,7 @@ Installs:
 Run this command on your VPS:
 
 ```bash 
-bash <(curl -sL https://raw.githubusercontent.com/XyPeRNuB/QFJ/main/install.sh)```
+bash <(curl -sL https://raw.githubusercontent.com/XyPeRNuB/QFJ/main/install.sh)```bash
 Services
 qBittorrent → http://YOUR_IP:8080
 FileBrowser → http://YOUR_IP:808
