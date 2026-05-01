@@ -3,7 +3,7 @@ set -e
 
 echo "==== Clean Media Server (qBittorrent 4.6.7) ===="
 
-PUBLIC_IP=$(curl -s ifconfig.me)
+PUBLIC_IP=$(curl -4 -s ifconfig.me)
 
 read -p "Username: " USERNAME
 read -s -p "Password (min 12 chars): " PASSWORD
