@@ -32,7 +32,16 @@ echo "Updating system..."
 apt update && apt upgrade -y
 
 echo "Installing base packages..."
-apt install -y curl wget ufw ffmpeg mediainfo jellyfin
+apt install -y curl wget ufw ffmpeg mediainfo ca-certificates gnupg
+
+echo "Adding Jellyfin repo..."
+mkdir -p /usr/share/keyrings
+curl -fsSL https://repo.jellyfin.org/debian/jellyfin_team.gpg.key | gpg --dearmor -o /usr/share/keyrings/jellyfin.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/debian bookworm main" > /etc/apt/sources.list.d/jellyfin.list
+
+apt update
+apt install -y jellyfin
 
 echo "Creating user..."
 useradd -m -s /bin/bash "$USERNAME" 2>/dev/null || true
@@ -88,7 +97,6 @@ echo "Configuring FileBrowser..."
 filebrowser config init
 filebrowser config set --port $FB_PORT --root /home/$USERNAME
 
-# enforce 12+ password
 FB_PASS="$PASSWORD"
 if [ ${#FB_PASS} -lt 12 ]; then
   FB_PASS="${PASSWORD}1234"
